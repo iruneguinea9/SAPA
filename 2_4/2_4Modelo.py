@@ -3,41 +3,30 @@ import joblib
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-def preprocesar_age(data):
-    data = pd.DataFrame(data, columns=["age"])
-    data["age"] = pd.cut(data["age"], bins=[-np.inf, 16, 32, 48, 64, np.inf], labels=[1, 2, 3, 4, 5])
-    return data
+def familia_name(function_transformer, feature_names_in):
+     return ['familia']
+# juntar parch y sibsp para familia
+def crearFamilia(X):
+     X=pd.DataFrame(X,columns=['parch','sibsp'])
+     X['familia'] = X['sibsp'] + X['parch'] 
+     return X['familia'].values.reshape(-1,1)
 
-def name_transform_age(transformer, feature_names_in):
-    return ["age"]
+def age_name(function_transformer, feature_names_in):
+     return ['age']
+def separar_age(X):
+     X=pd.DataFrame(X,columns=['age'])
+     X['age'] = pd.cut(X['age'], bins=[-1,16,32,48,64,np.inf], labels=[1,2,3,4,5]).to_numpy().reshape(-1,1)  
+     return X
 
-# Función para familia
-def preprocesar_familia(data):
-    df = pd.DataFrame(data, columns=["sibsp", "parch"])
-    df["familia"] = df["sibsp"] + df["parch"]
-    return df[["familia"]]
-
-def name_transform_familia(transformer, feature_names_in):
-    return ["familia"]
-
-
-# Función para fare
-def preprocesar_fare(data):
-    df = pd.DataFrame(data, columns=["fare"])
-    df["fare"].fillna(df["fare"].mean(), inplace=True)
-    df["fare"] = np.sqrt(df["fare"])
-    scaler = StandardScaler()
-    df["fare"] = scaler.fit_transform(df[["fare"]])
-    return df[["fare"]]
-
-def name_transform_fare(transformer, feature_names_in):
-    return ["fare"]
-
-
+def formatearSex(function_transformer, feature_names_in):
+     return ['sex']
+#male 0 female 1
+def sexNumeros(X):
+     return np.where(X == 'female',1,0)
 
 def main():
     # Cargar modelo previamente entrenado
-    modelo = joblib.load('modelo_titanic.joblib')
+    modelo = joblib.load('modelo.pkl')
     
     # Solicitar al usuario el archivo CSV
     csv_path = input("Por favor, ingresa la ruta del archivo CSV para predecir: ")
