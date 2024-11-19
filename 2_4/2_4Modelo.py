@@ -26,7 +26,7 @@ def sexNumeros(X):
 
 def main():
     # Cargar modelo previamente entrenado
-    modelo = joblib.load('modelo.pkl')
+    modelo = joblib.load('2_4/modelo.pkl')
     
     # Solicitar al usuario el archivo CSV
     csv_path = input("Por favor, ingresa la ruta del archivo CSV para predecir: ")
