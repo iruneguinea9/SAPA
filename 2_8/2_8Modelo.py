@@ -1,10 +1,6 @@
 import joblib
 import pandas as pd
 
-
-
-
-
 def predecir(modelo, datos_usuario):
     col = ['int.rate', 'installment', 'fico', 'revol.bal', 'revol.util', 'inq.last.6mths', 'pub.rec', 'purpose', 'credit.policy']
     df_datos = pd.DataFrame([datos_usuario], columns=col)
