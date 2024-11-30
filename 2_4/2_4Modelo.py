@@ -5,7 +5,6 @@ from sklearn.preprocessing import StandardScaler
 
 def familia_name(function_transformer, feature_names_in):
      return ['familia']
-# juntar parch y sibsp para familia
 def crearFamilia(X):
      X=pd.DataFrame(X,columns=['parch','sibsp'])
      X['familia'] = X['sibsp'] + X['parch'] 
@@ -23,6 +22,7 @@ def formatearSex(function_transformer, feature_names_in):
 #male 0 female 1
 def sexNumeros(X):
      return np.where(X == 'female',1,0)
+
 
 def main():
     # Cargar modelo previamente entrenado
