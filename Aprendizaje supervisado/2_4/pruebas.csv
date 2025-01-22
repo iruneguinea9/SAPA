@@ -1,6 +1,0 @@
-pclass,sex,age,sibsp,parch,fare,embarked
-1,male,22,1,0,71.2833,S
-3,female,38,1,5,7.925,C
-2,male,26,0,0,13.0,Q
-3,female,35,0,0,8.05,S
-1,male,40,1,1,53.1,S
